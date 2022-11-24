@@ -2,7 +2,7 @@
 
 The goal of the project is to develop a library of engineering calculations that will later be hosted on a free-to-use version of the Enjicalc web application. 
 
-You can either contribute to the engineering community and pull requests to this repository, or fork it to your organisation's account, where later you will be able to host your calcs on enterprise version of Enjicalc.  
+You can either contribute to the engineering community and push requests to this repository, or fork it to your organisation's account, where later you will be able to host your calcs on enterprise version of Enjicalc.  
 
 You can also upload excel files, which you would want to see open-source, in the discussion section or send them to viktar@silael.com. Make sure to include a brief explanation of what the spreadsheet does! 
 
