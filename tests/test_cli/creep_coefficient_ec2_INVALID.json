@@ -1,0 +1,211 @@
+{
+    "title": "Creep and Shrinkage strain - BS EN 1992-1-1, Annex B",
+    "calc-components": [
+        {
+            "variable-name": "RH",
+            "alias": "RH",
+            "constant-formula": 75,
+            "unit": "%",
+            "description": "Relative humidity of the ambient environment",
+            "comment": ""
+        },
+        {
+            "variable-name": "h_{section}",
+            "alias": "INVALID ALIAS",
+            "constant-formula": 400,
+            "unit": "mm",
+            "description": "Depth of the section",
+            "comment": ""
+        },
+        {
+            "variable-name": "b_{section}",
+            "alias": "b_section",
+            "constant-formula": 1000, 
+            "unit": "mm",
+            "description": "Width of the section",
+            "comment": "Consider 1000mm when working with slab"
+        },
+        {
+            "variable-name": "A_c",
+            "alias": "A_c",
+            "constant-formula": "h_section * b_section",
+            "unit": "mm^2",
+            "description": "Cross-sectional area",
+            "comment": ""
+        },
+        {
+            "variable-name": "f_{ck}",
+            "alias": "f_ck",
+            "constant-formula": 35,
+            "unit": "MPa",
+            "description": "Characteristic compressive cylinder strength of concrete at 28 days",
+            "comment": ""
+        },
+        {
+            "variable-name": "f_{cm}",
+            "alias": "f_cm",
+            "constant-formula": "f_ck + 8",
+            "unit": "MPa",
+            "description": "Mean value of concrete cylinder compressive strength at 28 days",
+            "comment": "BS EN 1992-1-1 Table 3.1"
+        },
+        {
+            "variable-name": "u",
+            "alias": "u",
+            "constant-formula": 1000,
+            "unit": "mm",
+            "description": "Perimeter of the member in contact with the atmosphere ",
+            "comment": "The values is for a 1m slab"
+        },
+        {
+            "variable-name": "t",
+            "alias": "t",
+            "constant-formula": 2557,
+            "unit": "days",
+            "description": "Age of concrete in days at the moment considered ",
+            "comment": "7 years is considered"
+        },
+        {
+            "variable-name": "t_0",
+            "alias": "t_0",
+            "constant-formula": 28,
+            "unit": "days",
+            "description": "Age of concrete at loading in days",
+            "comment": "Typically 28 days but may be 7 days for rapid construction"
+        },      
+        {
+            "variable-name": "\\alpha_1",
+            "alias": "alpha_1",
+            "constant-formula": "(35 / f_cm)^0.7",
+            "unit": "",
+            "description": "Coefficient to consider the influence of the concrete strength",
+            "comment": "B.8c"
+        },
+        {
+            "variable-name": "\\alpha_2",
+            "alias": "alpha_2",
+            "description": "Coefficient to consider the influence of the concrete strength",
+            "unit": "",
+            "constant-formula": "(35 / f_cm)^0.2",
+            "comment": "B.8c"
+        },
+        {
+            "variable-name": "\\alpha_3",
+            "alias": "alpha_3",
+            "constant-formula": "(35 / f_cm)^0.5",
+            "unit": "",
+            "description": "Coefficient to consider the influence of the concrete strength",
+            "comment": "B.8c"
+        },
+        {
+            "variable-name": "h_0",
+            "alias": "h_0",
+            "constant-formula": "2 * A_c / u",
+            "unit": "mm",
+            "description": "Notional size of the member",
+            "comment": "B.6"
+        },
+        {
+            "variable-name": "\\beta_{H,interim1}",
+            "alias": "beta_Hinterim1",
+            "constant-formula": "1.5 * (1+(0.012*RH)^18)*h_0 + 250",
+            "unit": "",
+            "description": "Interim value for calculation below",
+            "comment": "B.8a"
+        },
+        {
+            "variable-name": "\\beta_{H,interim2}",
+            "alias": "beta_Hinterim2",
+            "constant-formula": "1.5*(1 + (0.012*RH)^18)*h_0+250*alpha_3",
+            "unit": "",
+            "description": "Interim value for calculation below",
+            "comment": "B.8b"
+        },
+        {
+            "variable-name": "\\beta_H",
+            "alias": "beta_H",
+            "constant-formula": "f_cm <= 35 ? min(beta_Hinterim1, 1500) : min(beta_Hinterim2, 1500*alpha_3)",
+            "unit": "",
+            "description": "Coefficient depending on the relative humidity (RH in %) and the notional member size",
+            "comment": "B.8a & B.8b"
+        },
+        {
+            "variable-name": "\\beta_c(t,t_0)",
+            "alias": "beta_ctt_0",
+            "constant-formula": "( (t - t_0) / (beta_H + t - t_0) )^0.3",
+            "unit": "",
+            "description": "Coefficient to describe the development of creep with time after loading",
+            "comment": "B.7"
+        },
+        {
+            "variable-name": "\\beta(t_0)",
+            "alias": "betat_0",
+            "constant-formula": "1 / (0.1 + t_0^0.2)",
+            "unit": "",
+            "description": "Factor to allow for the effect of concrete age at loading on the notional creep coefficient",
+            "comment": "B.5"
+        },
+        {
+            "variable-name": "\\beta(f_cm)",
+            "alias": "betaf_cm",
+            "constant-formula": "16.8 / sqrt(f_cm)",
+            "unit": "",
+            "description": "Factor to allow for the effect of concrete strength on the notional creep coefficient",
+            "comment": "B.4"
+        },
+        {
+            "variable-name": "\\varphi_{RH,interim1}",
+            "alias": "varphi_RHinterim1",
+            "constant-formula": "1 + (1 - RH/100)/(0.1*h_0^(1/3))",
+            "unit": "",
+            "description": "Interim value for calculation below",
+            "comment": "B.3a"
+        },
+        {
+            "variable-name": "\\varphi_{RH,interim2}",
+            "alias": "varphi_RHinterim2",
+            "constant-formula": "(1 + (1 - RH/100)/(0.1*h_0^(1/3))*alpha_1)*alpha_2",
+            "unit": "",
+            "description": "Interim value for calculation below",
+            "comment": "B.3b"
+        },
+        {
+            "variable-name": "\\varphi_{RH}",
+            "alias": "varphi_RH",
+            "constant-formula": "f_cm <= 35 ? varphi_RHinterim1 : varphi_RHinterim2",
+            "unit": "",
+            "description": "Factor to allow for the effect of relative humidity on the notional creep coefficient",
+            "comment": "B.3a & B.3b"
+        },
+        {
+            "variable-name": "\\varphi_0",
+            "alias": "varphi_0",
+            "constant-formula": "varphi_RH * betaf_cm * betat_0",
+            "unit": "",
+            "description": "Notional creep coefficient",
+            "comment": "B.2"
+        },
+        {
+            "variable-name": "\\varphi(t, t_0)",
+            "alias": "varphitt_0",
+            "constant-formula": "varphi_0 * beta_ctt_0",
+            "unit": "",
+            "description": "The creep coefficient",
+            "comment": "BS EN 1992-1-1 Annex B (B.1)"
+        }
+    ],
+    "sections": [
+        {
+            "section-name": "input",
+            "variables": []
+        },
+        {
+            "section-name": "secondary-input",
+            "variables": []
+        },
+        {
+            "section-name": "output",
+            "variables": []
+        }
+    ]
+}

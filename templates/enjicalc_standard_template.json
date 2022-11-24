@@ -1,0 +1,29 @@
+{
+    "title": "",
+    "calc-components": [
+        {   
+            "subheading": "",
+            "variable-name": "",
+            "alias": "",
+            "constant-formula": "",
+            "unit": "",
+            "description": "",
+            "comment": "" 
+        }
+    ],
+    "sections": [
+        {
+            "section-name": "input",
+            "variables": []
+        },
+        {
+            "section-name": "secondary-input",
+            "variables": []
+        },
+        {
+            "section-name": "output",
+            "variables": []
+        }
+
+    ]
+}
